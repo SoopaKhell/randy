@@ -20,3 +20,14 @@ The range is inclusive, so this could output either:
 `I have 2 children`
 or
 `I have 3 children`
+
+To have Randy choose one of multiple things, use parenthesis and separate the choices with "|".
+```
+I like (apples|oranges|ninjas).
+```
+
+Possible outputs include:
+```
+I like apples.
+I like oranges.
+I like ninjas.```
