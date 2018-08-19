@@ -1,4 +1,6 @@
 import sys
+import re
+import random
 
 print(sys.argv)
 
@@ -27,5 +29,21 @@ if len(sys.argv) > 1:
             print("Error: Invalid filetype! Must be a .ry file.")
 
 
+#print(code.split("\n"))
+
+parsedLines = []
+
 for line in code.split('\n'):
-    print(line + "\\n")
+    randomNumber = re.search(r"\{\d+-\d+\}", line)
+    if randomNumber:
+        start, stop = randomNumber.span()
+        min, max = [int(n) for n in line[start:stop].strip("{}").split("-")]
+        number = random.randint(min ,max)
+        parsedLine = line[0:start] + str(number) + line[stop:]
+        parsedLines.append(parsedLine)
+    else:
+        parsedLines.append(line)
+
+
+output = '\n'.join(parsedLines)
+print(output)
