@@ -7,7 +7,7 @@ Randy scripts are always .ry files. To execute it, run:
 ```
 python randy.py {filename.ry}
 ```
-(Python 3 must be used.)
+(<a href="https://www.python.org/downloads/">Python 3</a> must be used)
 
 
 # Basic Syntax
