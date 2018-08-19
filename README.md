@@ -11,12 +11,24 @@ python randy.py {filename.ry}
 
 
 # Basic Syntax
-Randy has a simple method to generate random numbers. Curly brackets surround two numbers separated by a hyphen.
+Randy has a simple method to generate random numbers. Curly brackets surround two numbers separated by a forward-slash.
 ```
-I have {2-3} children.
+I have {2/3} children.
 ```
 
 The range is inclusive, so this could output either:
 `I have 2 children`
 or
 `I have 3 children`
+
+To have Randy choose one of multiple things, use parenthesis and separate the choices with "|".
+```
+I like (apples|oranges|ninjas).
+```
+
+Possible outputs include:
+```
+I like apples.
+I like oranges.
+I like ninjas.
+```
