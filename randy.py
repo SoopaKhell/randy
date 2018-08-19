@@ -2,7 +2,7 @@ import sys
 import re
 import random
 
-print(sys.argv)
+#print(sys.argv)
 
 modes = []
 
