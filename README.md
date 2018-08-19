@@ -4,7 +4,9 @@ This is an early stage of Randy and there are few features.
 
 # Usage
 Randy scripts are always .ry files. To execute it, run:
-```python randy.py {filename.ry}```
+```
+python randy.py {filename.ry}
+```
 (Python 3 must be used.)
 
 
