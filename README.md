@@ -30,4 +30,5 @@ Possible outputs include:
 ```
 I like apples.
 I like oranges.
-I like ninjas.```
+I like ninjas.
+```
