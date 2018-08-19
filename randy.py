@@ -29,18 +29,46 @@ if len(sys.argv) > 1:
 
 #print(code.split("\n"))
 
+def randomAnimal():
+    with open("data/animals.txt", 'r') as f:
+        listOfAnimals = f.read().split("\n")
+    return random.choice(listOfAnimals)
+
+def randomCountry():
+    with open("data/countries.txt", 'r') as f:
+        listOfAnimals = f.read().split("\n")
+    return random.choice(listOfAnimals)
+
+def randomDigit():
+    return str(random.randint(0, 9))
+
+generators = {
+    "animal": randomAnimal,
+    "digit": randomDigit,
+    "country": randomCountry
+}
+
+
 parsedLines = []
 
 for line in code.split('\n'):
     offset = 0
-    randomNumber = re.finditer(r"\{[^\{\}]*\}", line)
-    for match in randomNumber:
+    randomSomething = re.finditer(r"\$\w?\[[^\[\]]*\]", line)
+    for match in randomSomething:
         start = match.span()[0]+offset
         stop = match.span()[1]+offset
-        min, max = [int(n) for n in line[start:stop].strip("{}").split("/")]
-        number = random.randint(min, max)
-        line = line[0:start] + str(number) + line[stop:]
-        offset -= ((stop-start)-len(str(number)))
+        randomList = line[start:stop].strip("$")
+        if randomList[0].lower() == 'u':
+            randomList = randomList[1:].strip('[]')
+            randomString = generators[randomList]().upper()
+        elif randomList[0].lower() == 't':
+            randomList = randomList[1:].strip('[]')
+            randomString = generators[randomList]().title()
+        else:
+            randomList = randomList[1:].strip('[]')
+            randomString = generators[randomList]()
+        line = line[0:start] + randomString + line[stop:]
+        offset -= ((stop-start)-len(randomString))
 
     offset = 0
     makeChoice = re.finditer(r"\([^\(\)]*\)", line)
@@ -51,6 +79,18 @@ for line in code.split('\n'):
         choiceString = random.choice(options)
         line = line[0:start] + choiceString + line[stop:]
         offset -= ((stop-start)-len(choiceString))
+
+    offset = 0
+    randomNumber = re.finditer(r"\{[^\{\}]*\}", line)
+    for match in randomNumber:
+        start = match.span()[0]+offset
+        stop = match.span()[1]+offset
+        min, max = [int(n) for n in line[start:stop].strip("{}").split("/")]
+        number = random.randint(min, max)
+        line = line[0:start] + str(number) + line[stop:]
+        offset -= ((stop-start)-len(str(number)))
+
+
     parsedLines.append(line)
 
 
